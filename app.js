@@ -6,9 +6,16 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-const cors = require('cors');
-app.use(cors());
+var express = require('express');
 var app = express();
+const cors = require('cors');
+
+var corsOptions = {
+    origin: '*', // Permettre à toutes les origines
+    optionsSuccessStatus: 200 // Pour la compatibilité avec les anciens navigateurs
+};
+
+app.use(cors(corsOptions));
 
 app.use(logger('dev'));
 app.use(express.json());
