@@ -3,25 +3,19 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-require('dotenv').config();
-require('./models/connection');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var productsRouter = require('./routes/products');
-var categoriesRouter = require('./routes/categories');
 
+var express = require('express');
 var app = express();
 const cors = require('cors');
 
-// Utilisez les options CORS permissives
-app.use(cors({
-    origin: '*', // Permet toutes les origines
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Toutes les méthodes HTTP nécessaires
-}));
+var corsOptions = {
+    origin: '*', // Permettre à toutes les origines
+    optionsSuccessStatus: 200 // Pour la compatibilité avec les anciens navigateurs
+};
 
-const fileUpload = require('express-fileupload');
-app.use(fileUpload());
+app.use(cors(corsOptions));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -31,7 +25,5 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/products', productsRouter);
-app.use('/categories', categoriesRouter);
 
 module.exports = app;
