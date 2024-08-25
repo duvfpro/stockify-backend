@@ -14,16 +14,11 @@ var categoriesRouter = require('./routes/categories');
 var app = express();
 const cors = require('cors');
 
-// Définissez vos options CORS ici
-const corsOptions = {
-    origin: 'https://stockify-frontend-wine.vercel.app', // Remplacez par l'URL de votre frontend déployé
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Restreignez aux méthodes HTTP que vous utilisez
-    credentials: true, // Si vous gérez des cookies ou des sessions
-    optionsSuccessStatus: 200 // Pour la compatibilité avec les anciens navigateurs   
-};
-
-// Utilisez les options CORS
-app.use(cors(corsOptions));
+// Utilisez les options CORS permissives
+app.use(cors({
+    origin: '*', // Permet toutes les origines
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Toutes les méthodes HTTP nécessaires
+}));
 
 const fileUpload = require('express-fileupload');
 app.use(fileUpload());
