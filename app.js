@@ -16,7 +16,7 @@ const cors = require('cors');
 
 // Définissez vos options CORS ici
 const corsOptions = {
-    origin: 'https://stockify-frontend-wine.vercel.app/', // Remplacez par l'URL de votre frontend déployé
+    origin: 'https://stockify-frontend-wine.vercel.app', // Remplacez par l'URL de votre frontend déployé
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Restreignez aux méthodes HTTP que vous utilisez
     credentials: true, // Si vous gérez des cookies ou des sessions
     optionsSuccessStatus: 200 // Pour la compatibilité avec les anciens navigateurs   
