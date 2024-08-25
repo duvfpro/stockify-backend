@@ -22,9 +22,6 @@ const corsOptions = {
     optionsSuccessStatus: 200 // Pour la compatibilité avec les anciens navigateurs   
 };
 
-app.use(cors(corsOptions));
-};
-
 // Utilisez les options CORS
 app.use(cors(corsOptions));
 
