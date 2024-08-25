@@ -13,7 +13,7 @@ const uid2 = require("uid2");
 
 const moment = require("moment");
 
-const bcrypt = require("bcrypt");
+//const bcrypt = require("bcrypt");
 
 const nodemailer = require("nodemailer");
 const secretKey = uid2(32);
@@ -57,7 +57,7 @@ router.post("/addUser", async(req, res) => {
       username,
       email,
       token,
-      password: bcrypt.hashSync(password, 10),
+      password, //bcrypt.hashSync(password, 10),
       isAdmin,
     });
 
@@ -87,9 +87,9 @@ router.post("/signin", async (req, res) => {
       return res.json({ result: false, error: "User not found" });
     }
 
-    if (!bcrypt.compareSync(password, user.password)) {
-      return res.json({ result: false, error: "Wrong password" });
-    }
+    // if (!bcrypt.compareSync(password, user.password)) {
+    //   return res.json({ result: false, error: "Wrong password" });
+    // }
 
     const decodedToken = jwt.decode(user.token);
     const currentMoment = moment();
@@ -130,7 +130,6 @@ router.post("/signin", async (req, res) => {
   }
 });
 
-// ?
 router.post("/user", (req, res) => {
   const { username } = req.body;
   User.findOne({ username }).then((data) => {
@@ -203,7 +202,7 @@ router.post("/resetPassword", async (req, res) => {
       },
       {
         $set: {
-          password: bcrypt.hashSync(newPassword, 10),
+          password: newPassword, //bcrypt.hashSync(newPassword, 10),
           resetPasswordToken: null,
           resetPasswordExpires: null,
         },
@@ -262,8 +261,6 @@ router.get("/allUser", async (req, res) => {
     res.status(500).json({ result: false, error: "Error fetching users" });
   }
 })
-
-
 
 //#endregion
 
